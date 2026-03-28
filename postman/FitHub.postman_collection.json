@@ -1,0 +1,270 @@
+{
+  "info": {
+    "name": "FitHub API",
+    "description": "Colección de pruebas para la API de FitHub - Plataforma de centros deportivos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "POST",
+      "item": [
+        {
+          "name": "Crear persona",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre1\": \"Andrea\",\n  \"apellido1\": \"Garcia\",\n  \"apellido2\": \"Lopez\",\n  \"email\": \"andrea@fithub.com\",\n  \"password\": \"abc123\",\n  \"tipo\": \"cliente\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/personas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "personas"]
+            }
+          }
+        },
+        {
+          "name": "Crear actividad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pilates\",\n  \"descripcion\": \"Ejercicios de flexibilidad y fuerza\",\n  \"cupo_maximo\": 18,\n  \"horario\": \"Jueves 7AM\",\n  \"id_centro\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/actividades",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "actividades"]
+            }
+          }
+        },
+        {
+          "name": "Crear reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_cliente\": 1,\n  \"id_actividad\": 2,\n  \"fecha\": \"2026-04-01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas"]
+            }
+          }
+        },
+        {
+          "name": "Crear pago",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_reserva\": 1,\n  \"monto\": 250.00,\n  \"metodo_pago\": \"tarjeta\",\n  \"fecha_pago\": \"2026-04-01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/pagos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pagos"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET",
+      "item": [
+        {
+          "name": "Listar personas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/personas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "personas"]
+            }
+          }
+        },
+        {
+          "name": "Obtener persona por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/personas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "personas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Listar actividades",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/actividades",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "actividades"]
+            }
+          }
+        },
+        {
+          "name": "Listar reservas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT",
+      "item": [
+        {
+          "name": "Actualizar persona",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre1\": \"Carlos\",\n  \"apellido1\": \"Mejia\",\n  \"apellido2\": \"Rodriguez\",\n  \"email\": \"carlos.updated@fithub.com\",\n  \"tipo\": \"cliente\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/personas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "personas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar actividad",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Yoga Avanzado\",\n  \"descripcion\": \"Sesion avanzada de yoga\",\n  \"cupo_maximo\": 25,\n  \"horario\": \"Lunes 10AM\",\n  \"id_centro\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/actividades/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "actividades", "1"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar estado de reserva",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"confirmada\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/3",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DELETE",
+      "item": [
+        {
+          "name": "Eliminar pago",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/pagos/1/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pagos", "1", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar reserva",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/4",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas", "4"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar actividad",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/actividades/4",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "actividades", "4"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar persona",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/personas/12",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "personas", "12"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

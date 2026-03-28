@@ -17,4 +17,23 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// DELETE /api/actividades/:id
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      'DELETE FROM actividad WHERE id_actividad = $1 RETURNING *',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Actividad no encontrada' });
+    }
+
+    res.json({ message: 'Actividad eliminada', actividad: result.rows[0] });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

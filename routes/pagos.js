@@ -17,4 +17,23 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// DELETE /api/pagos/:id_reserva/:num_pago
+router.delete('/:id_reserva/:num_pago', async (req, res, next) => {
+  try {
+    const { id_reserva, num_pago } = req.params;
+    const result = await pool.query(
+      'DELETE FROM pago WHERE id_reserva = $1 AND num_pago = $2 RETURNING *',
+      [id_reserva, num_pago]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Pago no encontrado' });
+    }
+
+    res.json({ message: 'Pago eliminado', pago: result.rows[0] });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

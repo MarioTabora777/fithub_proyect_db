@@ -17,4 +17,23 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// DELETE /api/reservas/:id
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      'DELETE FROM reserva WHERE id_reserva = $1 RETURNING *',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Reserva no encontrada' });
+    }
+
+    res.json({ message: 'Reserva eliminada', reserva: result.rows[0] });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

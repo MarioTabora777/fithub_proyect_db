@@ -49,4 +49,23 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// DELETE /api/personas/:id
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      'DELETE FROM persona WHERE id_persona = $1 RETURNING *',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Persona no encontrada' });
+    }
+
+    res.json({ message: 'Persona eliminada', persona: result.rows[0] });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
